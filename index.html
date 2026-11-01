@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AMOO TECH | Technology & Electronics Store</title>
+<meta name="description" content="AMOO TECH is a fictional electronics store built for a frontend portfolio.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563ff'/%3E%3Cpath d='M9 22L16 8l7 14' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1630;--blue:#2563ff;--blue-d:#1a47c9;--bg:#fff;--grey:#f3f5f9;--line:#e1e6ef;--mut:#5b6784;--r:14px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font:16px/1.6 Inter,system-ui,sans-serif;color:var(--navy);background:var(--bg)}
+h1,h2,h3,.logo{font-family:Sora,Inter,sans-serif;line-height:1.15}
+img{max-width:100%;display:block}a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.sr{position:absolute;left:-9999px}
+.demo-bar{background:var(--navy);color:#cfd8f0;text-align:center;font-size:.8rem;padding:6px 12px}
+.header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:12px 5%;background:#fffffff2;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.logo{font-weight:800;text-decoration:none;font-size:1.3rem;letter-spacing:.02em}.logo span{color:var(--blue);margin-left:3px}
+nav{display:none;order:5;width:100%;flex-direction:column}nav.open{display:flex}
+nav a{text-decoration:none;padding:10px 0;font-weight:500;color:var(--mut)}nav a:hover{color:var(--blue)}
+.hsearch{flex:1;min-width:120px;order:3}
+input,select{font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--grey);color:var(--navy);min-width:0}
+input:focus,select:focus{border-color:var(--blue);background:#fff}
+.icon-btn{margin-left:auto;order:2;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font:inherit;cursor:pointer}
+.icon-btn b{background:var(--blue);color:#fff;border-radius:99px;padding:1px 8px;margin-left:4px;font-size:.8rem}
+.menu{margin-left:0;order:1}
+.btn{display:inline-block;background:var(--blue);color:#fff;border:1px solid var(--blue);padding:12px 22px;border-radius:10px;font:600 .95rem Inter,sans-serif;text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:var(--blue-d);transform:translateY(-1px)}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)}.btn.ghost:hover{background:var(--navy);color:#fff}
+.btn.light{background:#fff;color:var(--blue);border-color:#fff}.btn.sm{padding:9px 14px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.hero{display:grid;gap:32px;padding:48px 5%;background:var(--grey);align-items:center}
+.hero h1{font-size:clamp(2.2rem,7vw,4.2rem);font-weight:800;margin:0 0 16px}
+.hero p{color:var(--mut);max-width:48ch;margin:0 0 24px;font-size:1.1rem}
+.hero-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:24px;background:#dfe5f2}
+.section{padding:56px 5%}.section h2{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 8px}
+.note{color:var(--mut);font-size:.9rem;margin:0 0 18px}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.cat{border:1px solid var(--line);background:#fff;border-radius:var(--r);padding:22px 14px;font:600 1rem Sora,sans-serif;cursor:pointer;color:var(--navy);transition:.2s}
+.cat:hover,.cat.on{border-color:var(--blue);background:var(--blue);color:#fff}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.filters #search{grid-column:1/-1}
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
+.card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s}
+.card:hover{box-shadow:0 14px 30px #0b163018;transform:translateY(-3px)}
+.pic{position:relative;aspect-ratio:1/1;background:var(--grey)}.pic img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;top:10px;left:10px;background:#e5322d;color:#fff;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:99px}
+.badge.out{background:var(--navy);left:auto;right:10px}
+.cbody{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}.cbody h3{margin:0;font-size:1.05rem}
+.cbody small{color:var(--mut)}.cbody p{margin:0;color:var(--mut);font-size:.9rem;flex:1}
+.price{font:800 1.15rem Sora,sans-serif}.price s{font:400 .85rem Inter;color:var(--mut);margin-left:6px}
+.actions{display:flex;gap:8px;margin-top:8px}.actions .btn{flex:1;padding:10px 8px}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;background:var(--grey);border-radius:var(--r)}
+.deals{display:flex;flex-direction:column;gap:20px;align-items:flex-start;background:linear-gradient(120deg,var(--navy),var(--blue-d));color:#fff;padding:56px 5%}
+.deals h2{margin:0 0 8px;font-size:clamp(1.5rem,4vw,2.2rem)}.deals p{margin:0;color:#cfd8f0}
+.about{background:var(--grey)}.about p{max-width:65ch;color:var(--mut)}
+.reviews{display:grid;gap:16px}blockquote{margin:0;padding:22px;border:1px solid var(--line);border-radius:var(--r)}cite{display:block;margin-top:10px;color:var(--mut);font-size:.88rem}
+.news{background:var(--grey)}.inline{display:flex;gap:10px;flex-wrap:wrap}.inline input{flex:1;min-width:200px}
+#newsMsg{margin:10px 0 0;font-weight:500}.err{color:#c0262d}.ok{color:#0a7a3d}
+.contact{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;color:var(--mut)}
+.footer{display:grid;gap:28px;padding:48px 5% 24px;background:var(--navy);color:#cfd8f0}
+.footer h3{color:#fff;font-size:1rem;margin:0 0 10px}.footer a{display:block;text-decoration:none;padding:2px 0}.footer a:hover{color:#fff}
+.footer .logo{color:#fff;display:inline-block}.footer p{margin:6px 0}.copy{grid-column:1/-1;border-top:1px solid #ffffff22;padding-top:18px;font-size:.88rem}.copy a{display:inline;color:#8fb0ff}
+.overlay{position:fixed;inset:0;background:#0b163099;z-index:40}[hidden]{display:none!important}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:50;display:flex;flex-direction:column;animation:slide .25s}
+@keyframes slide{from{transform:translateX(100%)}}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}.drawer-head h2{margin:0;font-size:1.2rem}
+#cartItems{flex:1;overflow:auto;padding:12px 20px}
+.x{border:0;background:var(--grey);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;color:var(--navy)}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
+.item img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:var(--grey)}.item h4{margin:0;font-size:.92rem}.item small{color:var(--mut)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;margin-top:6px}
+.qty button{border:0;background:none;width:30px;height:30px;cursor:pointer;font-size:1rem;color:var(--navy)}.qty button:disabled{opacity:.3;cursor:not-allowed}.qty span{min-width:26px;text-align:center}
+.link{border:0;background:none;color:#c0262d;cursor:pointer;font:inherit;font-size:.85rem;text-decoration:underline}
+.drawer-foot{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:8px}
+.tot{display:flex;justify-content:space-between}.tot.big{font:800 1.2rem Sora,sans-serif}
+.cart-empty{text-align:center;padding:60px 10px;color:var(--mut)}
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:#0b1630aa;overflow:auto}
+.modal-box{position:relative;background:#fff;border-radius:20px;max-width:880px;width:100%;padding:24px;max-height:92vh;overflow:auto;animation:pop .2s}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.modal-box>.x{position:absolute;right:14px;top:14px;z-index:2}
+.detail{display:grid;gap:20px}.detail img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;background:var(--grey)}
+.detail h2{margin:0 0 6px;font-size:1.6rem}.specs{padding:0;list-style:none;margin:12px 0;border-top:1px solid var(--line)}
+.specs li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}.specs li span{color:var(--mut)}
+form.co{display:grid;gap:12px}.co label{font-weight:500;font-size:.9rem;display:grid;gap:4px}.co .e{color:#c0262d;font-size:.82rem;min-height:1em}
+.co input[aria-invalid=true]{border-color:#c0262d}
+.summary{background:var(--grey);border-radius:12px;padding:14px;font-size:.92rem;display:grid;gap:6px}
+.demo-tag{background:#fff4d6;color:#7a5600;padding:8px 12px;border-radius:8px;font-size:.85rem}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:10px;opacity:0;pointer-events:none;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}.cats{grid-template-columns:repeat(3,1fr)}.reviews{grid-template-columns:repeat(3,1fr)}.filters{grid-template-columns:2fr 1fr 1fr 1fr auto}.filters #search{grid-column:auto}.footer{grid-template-columns:repeat(2,1fr)}.deals{flex-direction:row;justify-content:space-between;align-items:center}}
+@media(min-width:960px){nav{display:flex!important;flex-direction:row;gap:20px;order:0;width:auto}.menu{display:none}.hsearch{max-width:260px;order:0;margin-left:auto}.icon-btn{margin-left:0;order:0}.hero{grid-template-columns:1fr 1fr;padding:72px 5%}.grid{grid-template-columns:repeat(4,1fr)}.cats{grid-template-columns:repeat(6,1fr)}.detail{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar">Portfolio demo: AMOO TECH is a fictional store. No real products, payments or orders.</div>
+<header class="header">
+  <a href="#home" class="logo">AMOO<span>TECH</span></a>
+  <nav id="nav" aria-label="Main">
+    <a href="#home">Home</a><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#deals">Deals</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+  <input id="headerSearch" class="hsearch" type="search" placeholder="Search products" aria-label="Search products">
+  <button class="icon-btn" id="cartBtn" aria-label="Open cart">Cart <b id="cartCount">0</b></button>
+  <button class="icon-btn menu" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-text">
+    <h1>TECH THAT MOVES YOU FORWARD.</h1>
+    <p>Discover carefully selected technology, electronics and everyday essentials designed to keep you connected.</p>
+    <div class="row"><a class="btn" href="#shop">Shop Now</a><a class="btn ghost" href="#categories">Explore Categories</a></div>
+  </div>
+  <img class="hero-img" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1000&q=80" alt="Laptop on a desk with accessories">
+</section>
+
+<section id="categories" class="section"><h2>Shop by category</h2>
+  <div class="cats" id="cats"></div></section>
+
+<section id="shop" class="section"><h2>Featured products</h2>
+  <p class="note">All products are fictional demonstration listings.</p>
+  <div class="filters">
+    <input id="search" type="search" placeholder="Search by product name" aria-label="Search by name">
+    <select id="category" aria-label="Category"></select>
+    <select id="sort" aria-label="Sort"><option value="featured">Sort: Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="new">Newest</option></select>
+    <select id="stock" aria-label="Availability"><option value="all">All availability</option><option value="in">In stock</option><option value="out">Out of stock</option></select>
+    <button class="btn ghost" id="reset">Reset</button>
+  </div>
+  <p id="resultCount" class="note" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="deals" class="deals">
+  <div><h2>Weekend deal: up to 25% off</h2><p>Fictional offers on phones, audio and gaming gear. Discounts are shown on product cards.</p></div>
+  <button class="btn light" id="dealsBtn">Shop Deals</button>
+</section>
+
+<section id="about" class="section about"><h2>About AMOO TECH</h2>
+  <p>AMOO TECH is an imaginary retailer created to showcase frontend skills. Its fictional mission: make quality technology easy to find, fairly priced and simple to buy, with clear product details and honest descriptions.</p></section>
+
+<section class="section"><h2>What customers say</h2><p class="note">Demonstration content, not genuine customer reviews.</p>
+  <div class="reviews">
+    <blockquote>"The product pages told me exactly what I needed to know."<cite>Sample Customer A</cite></blockquote>
+    <blockquote>"Cart and checkout were quick and clear."<cite>Sample Customer B</cite></blockquote>
+    <blockquote>"Easy to compare phones and headphones side by side."<cite>Sample Customer C</cite></blockquote>
+  </div></section>
+
+<section class="section news"><h2>Get demo updates</h2>
+  <p class="note">Demo form only. Your email is not collected or stored.</p>
+  <form id="newsForm" novalidate class="inline"><label class="sr" for="nEmail">Email address</label>
+    <input id="nEmail" type="email" placeholder="you@example.com" required><button class="btn">Subscribe</button></form>
+  <p id="newsMsg" role="status"></p></section>
+
+<section id="contact" class="section"><h2>Contact (fictional)</h2>
+  <ul class="contact"><li>Address: 12 Example Avenue, Demo City, Nigeria</li><li>Phone: +234 000 000 0000</li><li>Email: hello@amootech.example</li><li>Hours: Mon–Sat, 9am–6pm</li>
+  <li>Social: <a href="#contact" data-demo>Instagram</a> · <a href="#contact" data-demo>X</a> · <a href="#contact" data-demo>Facebook</a></li></ul></section>
+</main>
+
+<footer class="footer">
+  <div><a href="#home" class="logo">AMOO<span>TECH</span></a><p>Fictional portfolio project.</p></div>
+  <div><h3>Quick links</h3><a href="#shop">Shop</a><a href="#deals">Deals</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <div><h3>Categories</h3><div id="footCats"></div></div>
+  <div><h3>Contact</h3><p>hello@amootech.example<br>+234 000 000 0000</p></div>
+  <p class="copy">© 2026 AMOO TECH (fictional). <a href="https://github.com/ahmadcrt" target="_blank" rel="noopener">Designed &amp; Developed by Ahmad</a></p>
+</footer>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart" hidden>
+  <div class="drawer-head"><h2>Your cart</h2><button class="x" data-close aria-label="Close cart">✕</button></div>
+  <div id="cartItems"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
+<div class="modal" id="modal" role="dialog" aria-modal="true" hidden><div class="modal-box"><button class="x" data-close aria-label="Close">✕</button><div id="modalBody"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// Fictional demo products. Prices in Nigerian naira (NGN).
+const U = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=700&q=80`;
+const CATEGORIES = ["Smartphones","Laptops","Headphones","Smartwatches","Gaming","Accessories"];
+const PRODUCTS = [
+ {id:1,name:"Nova X Pro Smartphone",cat:"Smartphones",price:920000,old:1050000,stock:12,date:"2026-09-20",img:U("photo-1511707171634-5f897ff02aa9"),desc:"6.7-inch OLED display with an all-day battery.",specs:{Display:"6.7\" OLED 120Hz",Storage:"256GB",Battery:"5,000mAh",Camera:"50MP main"}},
+ {id:2,name:"Pulse 12 Smartphone",cat:"Smartphones",price:480000,old:null,stock:25,date:"2026-08-05",img:U("photo-1572569511254-d8f925fe2cbb"),desc:"Smooth, affordable everyday phone.",specs:{Display:"6.4\" AMOLED",Storage:"128GB",Battery:"4,500mAh",Camera:"48MP"}},
+ {id:3,name:"AirBook 14 Laptop",cat:"Laptops",price:1450000,old:1650000,stock:7,date:"2026-10-01",img:U("photo-1517336714731-489689fd1ca8"),desc:"Slim, light and fast for work and study.",specs:{Display:"14\" 2.2K",Memory:"16GB RAM",Storage:"512GB SSD",Weight:"1.2kg"}},
+ {id:4,name:"Titan 15 Creator Laptop",cat:"Laptops",price:2200000,old:null,stock:0,date:"2026-07-12",img:U("photo-1496181133206-80ce9b88a853"),desc:"Powerful performance for design and editing.",specs:{Display:"15.6\" 4K",Memory:"32GB RAM",Storage:"1TB SSD",GPU:"Dedicated 8GB"}},
+ {id:5,name:"Echo Studio Headphones",cat:"Headphones",price:185000,old:230000,stock:18,date:"2026-09-02",img:U("photo-1505740420928-5e560c06d30e"),desc:"Wireless over-ear with active noise cancelling.",specs:{Battery:"40 hours",Connection:"Bluetooth 5.3",ANC:"Yes",Weight:"250g"}},
+ {id:6,name:"Beat Buds Earphones",cat:"Headphones",price:65000,old:null,stock:40,date:"2026-10-10",img:U("photo-1583394838336-acd977736f90"),desc:"Compact true wireless earbuds.",specs:{Battery:"28 hours with case",Connection:"Bluetooth 5.2",Water:"IPX4",Weight:"5g each"}},
+ {id:7,name:"Chrono S Smartwatch",cat:"Smartwatches",price:140000,old:175000,stock:15,date:"2026-08-22",img:U("photo-1523275335684-37898b6baf30"),desc:"Health tracking with a bright always-on display.",specs:{Display:"1.4\" AMOLED",Battery:"7 days",Sensors:"Heart rate, SpO2",Water:"5ATM"}},
+ {id:8,name:"Fit Band Lite",cat:"Smartwatches",price:42000,old:null,stock:30,date:"2026-06-30",img:U("photo-1575311373937-040b8e1fd5b6"),desc:"Slim activity band for daily steps and sleep.",specs:{Display:"1.1\" AMOLED",Battery:"14 days",Sensors:"Heart rate",Water:"IP68"}},
+ {id:9,name:"Vortex Wireless Controller",cat:"Gaming",price:58000,old:72000,stock:22,date:"2026-09-15",img:U("photo-1606144042614-b2417e99c4e3"),desc:"Responsive controller with textured grips.",specs:{Connection:"Bluetooth / USB-C",Battery:"30 hours",Compat:"PC, mobile",Weight:"210g"}},
+ {id:10,name:"Apex RGB Gaming Keyboard",cat:"Gaming",price:78000,old:null,stock:9,date:"2026-10-18",img:U("photo-1587829741301-dc798b83add3"),desc:"Mechanical keys with per-key RGB lighting.",specs:{Switches:"Red linear",Layout:"Full size",Lighting:"RGB",Cable:"Detachable USB-C"}},
+ {id:11,name:"Glide Wireless Mouse",cat:"Accessories",price:24000,old:30000,stock:50,date:"2026-07-28",img:U("photo-1527864550417-7fd91fc51a46"),desc:"Quiet, ergonomic mouse for long work days.",specs:{DPI:"Up to 4,000",Battery:"12 months",Connection:"2.4GHz + Bluetooth",Weight:"85g"}},
+ {id:12,name:"Volt 20,000mAh Power Bank",cat:"Accessories",price:36000,old:null,stock:0,date:"2026-05-14",img:U("photo-1609091839311-d5365f9ff1c5"),desc:"Fast-charging portable power for two devices.",specs:{Capacity:"20,000mAh",Output:"45W USB-C",Ports:"2",Weight:"380g"}}
+];
+</script>
+<script>
+// Cart state with LocalStorage persistence.
+const Cart = {
+  KEY: "amootech_cart", items: [],
+  load(){ try{ const d=JSON.parse(localStorage.getItem(this.KEY)); this.items=Array.isArray(d)?d.filter(i=>PRODUCTS.some(p=>p.id===i.id)&&i.qty>0):[]; }catch(e){ this.items=[]; } },
+  save(){ try{ localStorage.setItem(this.KEY, JSON.stringify(this.items)); }catch(e){} },
+  add(id,qty=1){ const p=PRODUCTS.find(x=>x.id===id); if(!p||p.stock<1) return false;
+    const it=this.items.find(i=>i.id===id); if(it) it.qty=Math.min(it.qty+qty,p.stock); else this.items.push({id,qty:Math.min(qty,p.stock)}); this.save(); return true; },
+  setQty(id,qty){ const p=PRODUCTS.find(x=>x.id===id); const it=this.items.find(i=>i.id===id); if(!it) return;
+    if(qty<1) return this.remove(id); it.qty=Math.min(qty,p.stock); this.save(); },
+  remove(id){ this.items=this.items.filter(i=>i.id!==id); this.save(); },
+  clear(){ this.items=[]; this.save(); },
+  count(){ return this.items.reduce((s,i)=>s+i.qty,0); },
+  detailed(){ return this.items.map(i=>({...PRODUCTS.find(p=>p.id===i.id),qty:i.qty})); },
+  subtotal(){ return this.detailed().reduce((s,i)=>s+i.price*i.qty,0); },
+  total(){ return this.subtotal(); } // Delivery is free in this demo
+};
+</script>
+<script>
+const $ = s => document.querySelector(s);
+const naira = n => "₦" + n.toLocaleString("en-NG");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const FALLBACK = "data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='#e9eefb'/><text x='300' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='#2563ff'>AMOO TECH</text></svg>");
+const img = p => `<img src="${p.img}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'">`;
+const state = {q:"", cat:"All", sort:"featured", stock:"all"};
+let lastFocus = null;
+
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>t.classList.remove("show"),2200); }
+const discount = p => p.old ? Math.round((1-p.price/p.old)*100) : 0;
+
+function visible(){
+  const q = state.q.trim().toLowerCase();
+  const l = PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(q) &&
+    (state.cat==="All" || p.cat===state.cat) &&
+    (state.stock==="all" || (state.stock==="in" ? p.stock>0 : p.stock===0)));
+  if(state.sort==="low") l.sort((a,b)=>a.price-b.price);
+  if(state.sort==="high") l.sort((a,b)=>b.price-a.price);
+  if(state.sort==="new") l.sort((a,b)=>b.date.localeCompare(a.date));
+  return l;
+}
+function renderProducts(){
+  const l = visible();
+  $("#resultCount").textContent = `${l.length} product${l.length===1?"":"s"} shown`;
+  $("#grid").innerHTML = l.length ? l.map(p=>`
+   <article class="card"><div class="pic">${img(p)}${p.old?`<span class="badge">-${discount(p)}%</span>`:""}${p.stock===0?`<span class="badge out">Out of stock</span>`:""}</div>
+   <div class="cbody"><small>${p.cat}</small><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p>
+   <div class="price">${naira(p.price)}${p.old?`<s>${naira(p.old)}</s>`:""}</div>
+   <div class="actions"><button class="btn ghost sm" data-view="${p.id}">View Details</button><button class="btn sm" data-add="${p.id}" ${p.stock===0?"disabled":""}>${p.stock===0?"Sold out":"Add to Cart"}</button></div></div></article>`).join("")
+   : `<div class="empty"><h3>No products match</h3><p>Try a different search or clear your filters.</p><button class="btn" data-reset>Reset filters</button></div>`;
+  document.querySelectorAll(".cat").forEach(b=>b.classList.toggle("on", b.dataset.cat===state.cat));
+}
+function setCat(c){ state.cat=c; $("#category").value=c; renderProducts(); }
+function resetFilters(){ Object.assign(state,{q:"",cat:"All",sort:"featured",stock:"all"}); $("#search").value=$("#headerSearch").value=""; $("#category").value="All"; $("#sort").value="featured"; $("#stock").value="all"; renderProducts(); }
+
+function openLayer(el, withOverlay){ lastFocus=document.activeElement; el.hidden=false; $("#overlay").hidden=!withOverlay; document.body.style.overflow="hidden"; (el.querySelector("button,input")||el).focus(); }
+function closeAll(){ ["#drawer","#modal","#overlay"].forEach(s=>$(s).hidden=true); document.body.style.overflow=""; if(lastFocus&&document.contains(lastFocus)) lastFocus.focus(); }
+
+function renderCart(){
+  $("#cartCount").textContent = Cart.count();
+  const items = Cart.detailed();
+  $("#cartItems").innerHTML = items.length ? items.map(i=>`
+   <div class="item">${img(i)}<div><h4>${esc(i.name)}</h4><small>${naira(i.price)}</small>
+   <div class="qty"><button data-dec="${i.id}" aria-label="Decrease quantity">−</button><span>${i.qty}</span><button data-inc="${i.id}" aria-label="Increase quantity" ${i.qty>=i.stock?"disabled":""}>+</button></div></div>
+   <div><strong>${naira(i.price*i.qty)}</strong><br><button class="link" data-rm="${i.id}">Remove</button></div></div>`).join("")
+   : `<div class="cart-empty"><h3>Your cart is empty</h3><p>Add something you like and it will show up here.</p><button class="btn" data-close data-goshop>Browse products</button></div>`;
+  $("#cartFoot").innerHTML = items.length ? `<div class="tot"><span>Subtotal</span><span>${naira(Cart.subtotal())}</span></div><div class="tot"><span>Delivery</span><span>Free (demo)</span></div><div class="tot big"><span>Total</span><span>${naira(Cart.total())}</span></div><button class="btn" id="checkoutBtn">Checkout (demo)</button><button class="link" id="clearBtn">Clear cart</button>` : "";
+}
+function addToCart(id, qty=1){ if(Cart.add(id,qty)){ renderCart(); toast("Added to cart"); } }
+
+function openProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  $("#modalBody").innerHTML = `<div class="detail">${img(p)}<div><small>${p.cat}</small><h2>${esc(p.name)}</h2>
+   <div class="price">${naira(p.price)}${p.old?`<s>${naira(p.old)}</s>`:""}</div>
+   <p>${esc(p.desc)}</p><p><small>${p.stock>0?`${p.stock} in stock`:"Currently out of stock"}. Fictional demo product.</small></p>
+   <ul class="specs">${Object.entries(p.specs).map(([k,v])=>`<li><span>${k}</span>${esc(v)}</li>`).join("")}</ul>
+   <div class="row"><div class="qty"><button id="mDec" aria-label="Decrease">−</button><span id="mQty">1</span><button id="mInc" aria-label="Increase">+</button></div>
+   <button class="btn" id="mAdd" ${p.stock===0?"disabled":""}>Add to Cart</button></div></div></div>`;
+  let q=1; const set=v=>{ q=Math.max(1,Math.min(v,p.stock||1)); $("#mQty").textContent=q; };
+  $("#mDec").onclick=()=>set(q-1); $("#mInc").onclick=()=>set(q+1);
+  $("#mAdd").onclick=()=>{ addToCart(p.id,q); closeAll(); };
+  openLayer($("#modal"),false);
+}
+
+const RULES = {
+  name: v=>v.trim().length>=2 || "Enter your full name.",
+  email: v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Enter a valid email like you@example.com.",
+  phone: v=>/^\+?[0-9\s-]{7,15}$/.test(v.trim()) || "Enter a phone number with 7–15 digits.",
+  address: v=>v.trim().length>=8 || "Enter your full delivery address."
+};
+function openCheckout(){
+  if(!Cart.count()) return;
+  const items = Cart.detailed();
+  $("#modalBody").innerHTML = `<h2>Checkout demonstration</h2><p class="demo-tag">Demo only. No payment is taken and no order is sent to a real store. Please don't enter real card details.</p>
+  <form class="co" id="coForm" novalidate>
+   ${[["name","Full name","text","name"],["email","Email","email","email"],["phone","Phone number","tel","tel"],["address","Delivery address","text","street-address"]].map(([id,l,t,a])=>`<label>${l}<input id="f_${id}" type="${t}" autocomplete="${a}" required><span class="e" id="e_${id}"></span></label>`).join("")}
+   <div class="summary"><strong>Order summary</strong>${items.map(i=>`<div class="tot"><span>${i.qty} × ${esc(i.name)}</span><span>${naira(i.price*i.qty)}</span></div>`).join("")}<div class="tot big"><span>Total</span><span>${naira(Cart.total())}</span></div></div>
+   <button class="btn">Place Demo Order</button></form>`;
+  $("#coForm").addEventListener("submit", submitOrder);
+  $("#drawer").hidden=true; openLayer($("#modal"),true);
+}
+function submitOrder(e){
+  e.preventDefault(); let ok=true;
+  for(const k in RULES){ const f=$("#f_"+k), r=RULES[k](f.value), bad=r!==true; f.setAttribute("aria-invalid", bad); $("#e_"+k).textContent = bad?r:""; if(bad&&ok){ f.focus(); ok=false; } }
+  if(!ok) return;
+  const btn=e.target.querySelector(".btn"); btn.disabled=true; btn.textContent="Placing demo order…";
+  const total=Cart.total();
+  setTimeout(()=>{
+    const ref="AMOO-DEMO-"+Date.now().toString(36).toUpperCase().slice(-6)+Math.floor(Math.random()*90+10);
+    Cart.clear(); renderCart();
+    $("#modalBody").innerHTML=`<h2>Demo order placed</h2><p class="demo-tag">This is a demonstration. No real order was created.</p><p>Reference: <strong>${ref}</strong></p><p>Total: <strong>${naira(total)}</strong></p><button class="btn" data-close data-goshop>Continue shopping</button>`;
+  },800);
+}
+
+function init(){
+  Cart.load();
+  $("#category").innerHTML = ["All",...CATEGORIES].map(c=>`<option value="${c}">${c==="All"?"All categories":c}</option>`).join("");
+  $("#cats").innerHTML = CATEGORIES.map(c=>`<button class="cat" data-cat="${c}">${c}</button>`).join("");
+  $("#footCats").innerHTML = CATEGORIES.map(c=>`<a href="#shop" data-cat="${c}">${c}</a>`).join("");
+  renderProducts(); renderCart();
+
+  $("#search").addEventListener("input",e=>{ state.q=e.target.value; $("#headerSearch").value=e.target.value; renderProducts(); });
+  $("#headerSearch").addEventListener("input",e=>{ state.q=e.target.value; $("#search").value=e.target.value; renderProducts(); });
+  $("#headerSearch").addEventListener("keydown",e=>{ if(e.key==="Enter") location.hash="#shop"; });
+  $("#category").onchange=e=>setCat(e.target.value);
+  $("#sort").onchange=e=>{ state.sort=e.target.value; renderProducts(); };
+  $("#stock").onchange=e=>{ state.stock=e.target.value; renderProducts(); };
+  $("#reset").onclick=resetFilters;
+  $("#dealsBtn").onclick=()=>{ resetFilters(); document.getElementById("shop").scrollIntoView(); toast("Discount badges mark the deals"); };
+  $("#cartBtn").onclick=()=>openLayer($("#drawer"),true);
+  $("#menuBtn").onclick=e=>{ const o=$("#nav").classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded",o); };
+  $("#nav").addEventListener("click",()=>$("#nav").classList.remove("open"));
+  $("#overlay").onclick=closeAll;
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeAll(); });
+  $("#modal").addEventListener("click",e=>{ if(e.target===$("#modal")) closeAll(); });
+
+  document.addEventListener("click",e=>{
+    const t=e.target.closest("button,a"); if(!t) return;
+    const d=t.dataset;
+    if(d.cat){ setCat(d.cat); if(t.tagName==="BUTTON") document.getElementById("shop").scrollIntoView(); }
+    if(d.view) openProduct(+d.view);
+    if(d.add) addToCart(+d.add);
+    if("reset" in d) resetFilters();
+    if("close" in d){ closeAll(); if("goshop" in d) location.hash="#shop"; }
+    if(d.inc){ const it=Cart.items.find(i=>i.id==d.inc); Cart.setQty(+d.inc,it.qty+1); renderCart(); }
+    if(d.dec){ const it=Cart.items.find(i=>i.id==d.dec); Cart.setQty(+d.dec,it.qty-1); renderCart(); }
+    if(d.rm){ Cart.remove(+d.rm); renderCart(); }
+    if(t.id==="clearBtn"){ Cart.clear(); renderCart(); toast("Cart cleared"); }
+    if(t.id==="checkoutBtn") openCheckout();
+    if("demo" in d){ e.preventDefault(); toast("Demo link: no real social page"); }
+  });
+
+  $("#newsForm").addEventListener("submit",e=>{
+    e.preventDefault(); const v=$("#nEmail").value, m=$("#newsMsg");
+    if(RULES.email(v)!==true){ m.className="err"; m.textContent="Enter a valid email address."; return; }
+    m.className="ok"; m.textContent="Demo only: thanks! Your email was not stored or sent anywhere."; e.target.reset();
+  });
+}
+document.addEventListener("DOMContentLoaded",init);
+</script>
+</body>
+</html>
